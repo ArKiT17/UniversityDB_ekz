@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,53 @@ namespace ekz.Pages {
 	public partial class StudentsMain : Page {
 		public StudentsMain() {
 			InitializeComponent();
+		}
+
+		private void Page_Loaded(object sender, RoutedEventArgs e) {
+			StudentsGrid.ItemsSource = StudentRepository.GetStudents();
+		}
+
+		private void Back_btn_click(object sender, RoutedEventArgs e) {
+			NavigationService.GoBack();
+        }
+
+		private void AddStudent_click(object sender, RoutedEventArgs e) {
+			NavigationService.Navigate(new AddStudent());
+		}
+
+		private void ChangeStudent_click(object sender, RoutedEventArgs e) {
+			if (StudentsGrid.SelectedIndex != -1) {
+				using (var connection = new SqlConnection(Buffer.connectionString)) {
+					Buffer.selectedStudent = (StudentsGrid.ItemsSource as List<Student>)[StudentsGrid.SelectedIndex];
+					NavigationService.Navigate(new ChangeStudent());
+				}
+			}
+			else
+				MessageBox.Show("Виберіть студента");
+		}
+
+		private void DeleteStudent_click(object sender, RoutedEventArgs e) {
+			if (StudentsGrid.SelectedIndex != -1) {
+				if (MessageBox.Show("Ви впевнені, що хочете видалити цього студента?",
+					"Попередження", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) {
+					Buffer.selectedStudent = (StudentsGrid.ItemsSource as List<Student>)[StudentsGrid.SelectedIndex];
+					if (StudentRepository.DeleteStudent(Buffer.selectedStudent.Id))
+						StudentsGrid.ItemsSource = StudentRepository.GetStudents();
+				}
+			}
+			else
+				MessageBox.Show("Виберіть студента");
+		}
+
+		private void LinkStudent_click(object sender, RoutedEventArgs e) {
+			if (StudentsGrid.SelectedIndex != -1) {
+				Buffer.selectedCourse = null;
+				Buffer.selectedStudent = (StudentsGrid.ItemsSource as List<Student>)[StudentsGrid.SelectedIndex];
+				Buffer.selectedItemIndex = StudentsGrid.SelectedIndex;
+				NavigationService.Navigate(new LinkStudentToCourse());
+			}
+			else
+				MessageBox.Show("Виберіть студента");
 		}
 	}
 }

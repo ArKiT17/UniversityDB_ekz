@@ -4,20 +4,37 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ekz.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
+	  Loaded="Page_Loaded"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CoursesMain">
 
-	<Grid Background="#d2ac7b">
-		<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-			<Button Content="Студенти" Height="80" Width="400" Margin="20" 
-					FontSize="40" FontWeight="Medium" 
-					Background="#d18a5a" Foreground="#4a3122"
-					Click="Students_Click"/>
-			<Button Content="Курси" Height="80" Width="400" Margin="20" 
-					FontSize="40" FontWeight="Medium" 
-					Background="#d18a5a" Foreground="#4a3122"
-					Click="Courses_Click"/>
+	<Grid Background="#f5e6bd">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.12*"/>
+			<RowDefinition Height="0.8*"/>
+			<RowDefinition Height="0.12*"/>
+		</Grid.RowDefinitions>
+		<Button Background="#efbf7f" Foreground="#4a3122"
+				FontSize="16" FontWeight="Medium"
+				Height="30" Width="100"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				Margin="20 10 0 0"
+				Content="Назад" Click="Back_btn_click" IsCancel="True"/>
+		<DataGrid x:Name="CoursesGrid" Grid.Row="1"
+				  IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
+				  FontSize="16" Margin="10 0 10 0">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Id" Width="60" Binding="{Binding Id}"/>
+				<DataGridTextColumn Header="Назва" Width="2*" Binding="{Binding Name}"/>
+				<DataGridTextColumn Header="Вчитель" Width="3*" Binding="{Binding Teacher}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button x:Name="addCourse"    Background="#efbf7f" Foreground="#4a3122" Width="160" Height="30" FontSize="16" FontWeight="Medium" Margin="10 0 10 0" Content="Додати курс" Click="AddCourse_click"/>
+			<Button x:Name="editCourse"   Background="#efbf7f" Foreground="#4a3122" Width="160" Height="30" FontSize="16" FontWeight="Medium" Margin="10 0 10 0" Content="Редагувати курс" Click="ChangeCourse_click"/>
+			<Button x:Name="deleteCourse" Background="#efbf7f" Foreground="#4a3122" Width="160" Height="30" FontSize="16" FontWeight="Medium" Margin="10 0 10 0" Content="Видалити курс" Click="DeleteCourse_click"/>
+			<Button x:Name="linkCourse"   Background="#efbf7f" Foreground="#4a3122" Width="220" Height="30" FontSize="16" FontWeight="Medium" Margin="10 0 10 0" Content="Додати студента до курсу" Click="LinkCourse_click"/>
 		</StackPanel>
 	</Grid> 
 </Page>
