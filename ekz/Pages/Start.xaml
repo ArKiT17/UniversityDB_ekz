@@ -9,7 +9,7 @@
       Title="Start">
 
 	<Grid Background="#f5e6bd">
-		<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+		<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 70">
 			<Button Content="Студенти" Height="80" Width="400" Margin="20" 
 					FontSize="40" FontWeight="Medium" 
 					Background="#efbf7f" Foreground="#4a3122"
@@ -19,5 +19,17 @@
 					Background="#efbf7f" Foreground="#4a3122"
 					Click="Courses_Click"/>
 		</StackPanel>
-    </Grid>
+		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+			<Button Content="Експорт даних в CSV" Height="45" Width="220" Margin="0 0 10 10" 
+					FontSize="20" FontWeight="Medium" 
+					Background="#efbf7f" Foreground="#4a3122"
+					HorizontalAlignment="Right" VerticalAlignment="Bottom"
+					Click="ExportCSV_Click"/>
+			<Button Content="Експорт даних в Excel" Height="45" Width="220" Margin="0 0 10 10" 
+					FontSize="20" FontWeight="Medium" 
+					Background="#efbf7f" Foreground="#4a3122"
+					HorizontalAlignment="Right" VerticalAlignment="Bottom"
+					Click="ExportExcel_Click"/>
+		</StackPanel>
+	</Grid>
 </Page>
