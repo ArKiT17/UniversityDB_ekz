@@ -77,7 +77,7 @@ namespace ekz.Pages
 			if (search.Text != string.Empty) {
 				List<Course> filteredCourses = new List<Course>();
 				foreach (Course tmp in CourseRepository.GetCourses())
-					if (tmp.Name.Contains(search.Text) || tmp.Teacher.Contains(search.Text))
+					if (tmp.Name.ToLower().Contains(search.Text) || tmp.Teacher.ToLower().Contains(search.Text))
 						filteredCourses.Add(tmp);
 				CoursesGrid.ItemsSource = filteredCourses;
 			}

@@ -76,7 +76,7 @@ namespace ekz.Pages {
 			if (search.Text != string.Empty) {
 				List<Student> filteredStudents = new List<Student>();
 				foreach (Student tmp in StudentRepository.GetStudents())
-					if (tmp.Surname.Contains(search.Text) || tmp.Name.Contains(search.Text))
+					if (tmp.Surname.ToLower().Contains(search.Text) || tmp.Name.ToLower().Contains(search.Text))
 						filteredStudents.Add(tmp);
 				StudentsGrid.ItemsSource = filteredStudents;
 			}
