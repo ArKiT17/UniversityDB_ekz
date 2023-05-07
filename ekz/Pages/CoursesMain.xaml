@@ -28,7 +28,7 @@
 		</StackPanel>
 		<DataGrid x:Name="CoursesGrid" Grid.Row="1"
 				  IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
-				  FontSize="16" Margin="10 0 10 0">
+				  FontSize="16" Margin="10 0 10 0" MouseDoubleClick="CoursesGrid_doubleClick">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Id" Width="60" Binding="{Binding Id}"/>
 				<DataGridTextColumn Header="Назва" Width="2*" Binding="{Binding Name}"/>

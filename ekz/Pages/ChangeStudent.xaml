@@ -28,7 +28,7 @@
 					FontSize="25" FontWeight="Medium"
 					Height="50" Width="130"
 					HorizontalAlignment="Center"
-					Content="Зберегти" Margin="0 10 0 0" Click="SaveStudent_click"/>
+					Content="Зберегти" Margin="0 10 0 0" Click="SaveStudent_click" IsDefault="True"/>
 		</StackPanel>
 	</Grid>
 </Page>

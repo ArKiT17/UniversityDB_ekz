@@ -84,5 +84,14 @@ namespace ekz.Pages
 			else
 				CoursesGrid.ItemsSource = CourseRepository.GetCourses();
 		}
+
+		private void CoursesGrid_doubleClick(object sender, MouseButtonEventArgs e) {
+			if (CoursesGrid.SelectedItem != null) {
+				Buffer.selectedCourse = (CoursesGrid.ItemsSource as List<Course>)[CoursesGrid.SelectedIndex];
+				Buffer.selectedStudent = null;
+				Buffer.selectedItemIndex = CoursesGrid.SelectedIndex;
+				NavigationService.Navigate(new CourseInfo());
+			}
+		}
 	}
 }

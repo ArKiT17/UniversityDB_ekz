@@ -41,5 +41,18 @@ namespace ekz {
 					return 0;
 			}
 		}
+		public static List<Course> CoursesWhereStudent(Student student) {
+			using (var connection = new SqlConnection(Buffer.connectionString)) {
+				return connection.Query<Course>($"select Courses.Id, Courses.[Name], Courses.Teacher from Courses join StudentsCourses on StudentsCourses.CoursesId = Courses.Id join Students on Students.Id = StudentsCourses.StudentsId where Students.Id = {student.Id}").ToList();
+			}
+		}
+		public static bool DeleteStudentFromCourse(Student student, Course course) {
+			using (var connection = new SqlConnection(Buffer.connectionString)) {
+				if (connection.Execute($"delete from StudentsCourses where StudentsId = {student.Id} and CoursesId = {course.Id}") > 0)
+					return true;
+				else
+					return false;
+			}
+		}
 	}
 }
