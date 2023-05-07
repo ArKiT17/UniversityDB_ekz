@@ -26,6 +26,7 @@ namespace ekz.Pages
 		}
 
 		private void Page_Loaded(object sender, RoutedEventArgs e) {
+			search.Text = string.Empty;
 			CoursesGrid.ItemsSource = CourseRepository.GetCourses();
 		}
 		
@@ -70,6 +71,18 @@ namespace ekz.Pages
 			}
 			else
 				MessageBox.Show("Виберіть курс");
+		}
+
+		private void search_textChanged(object sender, TextChangedEventArgs e) {
+			if (search.Text != string.Empty) {
+				List<Course> filteredCourses = new List<Course>();
+				foreach (Course tmp in CourseRepository.GetCourses())
+					if (tmp.Name.Contains(search.Text) || tmp.Teacher.Contains(search.Text))
+						filteredCourses.Add(tmp);
+				CoursesGrid.ItemsSource = filteredCourses;
+			}
+			else
+				CoursesGrid.ItemsSource = CourseRepository.GetCourses();
 		}
 	}
 }

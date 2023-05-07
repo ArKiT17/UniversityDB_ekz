@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace ekz.Pages {
 		}
 
 		private void Page_Loaded(object sender, RoutedEventArgs e) {
+			search.Text = string.Empty;
 			StudentsGrid.ItemsSource = StudentRepository.GetStudents();
 		}
 
@@ -68,6 +70,18 @@ namespace ekz.Pages {
 			}
 			else
 				MessageBox.Show("Виберіть студента");
+		}
+
+		private void search_textChanged(object sender, TextChangedEventArgs e) {
+			if (search.Text != string.Empty) {
+				List<Student> filteredStudents = new List<Student>();
+				foreach (Student tmp in StudentRepository.GetStudents())
+					if (tmp.Surname.Contains(search.Text) || tmp.Name.Contains(search.Text))
+						filteredStudents.Add(tmp);
+				StudentsGrid.ItemsSource = filteredStudents;
+			}
+			else
+				StudentsGrid.ItemsSource = StudentRepository.GetStudents();
 		}
 	}
 }
